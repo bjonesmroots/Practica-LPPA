@@ -49,7 +49,6 @@ body {
     margin: 0 auto;
     width: 400px;
     height: 400px;
-    border: 3px solid black;
 }
 
 .ejercicio3 .div2 {
@@ -78,7 +77,6 @@ body {
     margin: 0 auto;
     width: 400px;
     height: 400px;
-    border: 3px solid black;
 }
 
 .ejercicio4 .div2 {
@@ -108,7 +106,6 @@ body {
     margin: 0 auto;
     width: 400px;
     height: 400px;
-    border: 3px solid black;
 }
 
 .ejercicio5 .div2 {
@@ -143,3 +140,116 @@ body {
     padding: 10px;
 }
 
+/* EJERCICO 6*/
+.ejercicio6 {
+    background-color: #999;
+}
+.ejercicio6 .div1 {
+    display: flex;
+    align-items: center;
+    background-color: #F00;
+    margin: 0 auto;
+    width: 400px;
+    height: 400px;
+}
+
+.ejercicio6 .div2 {
+    background-color: #00f;
+    margin: 20px auto;
+    width: 150px;
+    height: 300px;
+}
+
+.ejercicio6 .div3 {
+    background-color: #0f0;
+    margin: 20px auto;
+    width: 150px;
+    height: 300px;
+}
+
+/* EJERCICO 7*/
+.ejercicio7 {
+    background-color: #999;
+}
+.ejercicio7 .div1 {
+    display: flex;
+    align-items: center;
+    background-color: #F00;
+    margin: 0 auto;
+    width: 400px;
+    height: 400px;
+}
+
+.ejercicio7 .div2 {
+    background-color: #0f0;
+    margin: 20px auto;
+    width: 50px;
+    height: 300px;
+}
+
+.ejercicio7 .div3 {
+    background-color: #00f;
+    margin: 20px auto;
+    width: 50px;
+    height: 300px;
+}
+
+.ejercicio7 .div4 {
+    background-color: #999;
+    margin: 20px auto;
+    width: 50px;
+    height: 300px;
+}
+
+.ejercicio7 .div5 {
+    background-color: #000;
+    margin: 20px auto;
+    width: 50px;
+    height: 300px;
+}
+
+
+/* EJERCICO 8*/
+.ejercicio8 {
+    background-color: #999;
+}
+.ejercicio8 .div1 {
+    display: flex;
+    align-items: center;
+    background-color: #0f0;
+    margin: 0 auto;
+    width: 100px;
+    height: 400px;
+}
+
+.ejercicio8 .div2 {
+    display: flex;
+    align-items: center;
+    background-color: #F00;
+    margin: 0 auto;
+    width: 400px;
+    height: 400px;
+}
+
+.ejercicio8 .div3 {
+    display: flex;
+    align-items: center;
+    background-color: #000;
+    margin: 0 auto;
+    width: 100px;
+    height: 400px;
+}
+
+.ejercicio8 .div4 {
+    background-color: #00f;
+    margin: 20px auto;
+    width: 50px;
+    height: 300px;
+}
+
+.ejercicio8 .div5 {
+    background-color: #999;
+    margin: 20px auto;
+    width: 50px;
+    height: 300px;
+}
