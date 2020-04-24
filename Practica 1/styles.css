@@ -253,3 +253,90 @@ body {
     width: 100px;
     height: 300px;
 }
+
+/* EJERCICO 9*/
+.ejercicio9 {
+    background-color: #00f;
+    display: block;
+}
+
+.ejercicio9 .div1 {
+    display: flex;
+    background-color: #999;
+    margin: 20px auto;
+    width: 850px;
+    height: 100px;
+}
+.ejercicio9 .div1-1 {
+    background-color: #f00;
+    margin: 20px auto;
+    width: 650px;
+    height: 50px;
+}
+.ejercicio9 .div1-2 {
+    background-color: #000;
+    margin: 20px auto;
+    width: 150px;
+    height: 50px;
+}
+
+.ejercicio9 .div2 {
+    display: flex;
+    background-color: #f00;
+    margin: 20px auto;
+    width: 850px;
+    height: 550px;
+}
+
+.ejercicio9 .div2-1 {
+    background-color: #0f0;
+    margin: 20px auto;
+    width: 250px;
+    height: 500px;
+}
+
+
+.ejercicio9 .div2-1-1 {
+    background-color: #00f;
+    margin: 20px auto;
+    width: 200px;
+    height: 50px;
+}
+
+.ejercicio9 .div2-2 {
+    background-color: #fff;
+    margin: 20px auto;
+    width: 450px;
+    height: 500px;
+}
+
+
+.ejercicio9 .div2-2-1 {
+    display: flex;
+    background-color: #fff;
+    margin: 20px auto;
+    width: 450px;
+    height: 100px;
+}
+
+.ejercicio9 .div2-2-1-1 {
+    background-color: #000;
+    margin: 20px auto;
+    width: 100px;
+    height: 100px;
+}
+
+.ejercicio9 .div3 {
+    display: flex;
+    background-color: #999;
+    margin: 20px auto;
+    width: 850px;
+    height: 100px;
+}
+
+.ejercicio9 .div3-1 {
+    background-color: #0f0;
+    margin: 20px auto;
+    width: 750px;
+    height: 50px;
+}
