@@ -1,0 +1,79 @@
+<html>
+    <head>
+        <script src="app.js"></script>
+        <link rel="stylesheet" href="app.js">        
+        <link rel="stylesheet" href="styles.css">
+    </head>
+    <body>
+        <form>            
+            <table class="calculadora">
+                <tbody>
+                    <tr class="renglon">
+                        <td colspan="4">
+                            <input id="resultado" type="text" value="0" size="15">
+                            <input type="button" value="CLR" onclick="borrar();" class="boton">
+                            <input id="memoria" type="hidden" value="0">
+                        </td>
+                    </tr>            
+                    <tr class="renglon">
+                        <td>
+                            <input type="button" value="7" onclick="escribir(this.value)" class="boton">
+                        </td>
+                        <td>
+                            <input type="button" value="8" onclick="escribir(this.value)" class="boton">
+                        </td>
+                        <td>
+                            <input type="button" value="9" onclick="escribir(this.value)" class="boton">
+                        </td>
+                        <td>
+                            <input type="button" value="/" onclick="operaciones(this.value)" class="boton">
+                        </td>
+                    </tr>            
+                    <tr class="renglon">
+                        <td>
+                            <input type="button" value="4" onclick="escribir(this.value)" class="boton">
+                        </td>
+                        <td>
+                            <input type="button" value="5" onclick="escribir(this.value)" class="boton">
+                        </td>
+                        <td>
+                            <input type="button" value="6" onclick="escribir(this.value)" class="boton">
+                        </td>
+                        <td>
+                            <input type="button" value="*" onclick="operaciones(this.value)" class="boton">
+                        </td>
+                    </tr>
+                
+                    <tr class="renglon">
+                        <td>
+                            <input type="button" value="1" onclick="escribir(this.value)" class="boton">
+                        </td>
+                        <td>
+                            <input type="button" value="2" onclick="escribir(this.value)" class="boton">
+                        </td>
+                        <td>
+                            <input type="button" value="3" onclick="escribir(this.value)" class="boton">
+                        </td>
+                        <td>
+                            <input type="button" value="-" onclick="operaciones(this.value); return false;" class="boton">
+                        </td>
+                    </tr>
+                    <tr class="renglon">
+                        <td>
+                            <input type="button" value="0" onclick="escribir(this.value)" class="boton"> 
+                        </td>
+                        <td>
+                            <input type="button" value="." onclick="escribir(this.value)" class="boton">
+                        </td>
+                        <td>
+                            <input type="button" value="=" onclick="operaciones(this.value); return false;" class="boton">
+                        </td>
+                        <td>
+                            <input type="button" value="+" onclick="operaciones(this.value); return false;" class="boton">
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+        </form> 
+    </body>
+</html>

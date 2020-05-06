@@ -1,0 +1,26 @@
+.calculadora {
+    border: 1px solid #000; 
+    text-align:center;
+    margin: 0 auto;
+    padding: 10px;
+    background-color: #dadada;
+    height: 300px;
+}
+
+#resultado {
+    border: 2px solid black; 
+    padding: 10px;
+    font-size: 20px;
+}
+
+.renglon {
+    text-align:center;
+}
+
+.boton {
+    width:55px;
+    background-color: black;
+    color: white;
+    height: 40px;
+    font-size: 20px;
+}
