@@ -22,18 +22,24 @@ function escribir(val) {
 function operaciones(oper)
 {
     if (oper != '=') {
-        if (document.getElementById("resultado").value.indexOf('*') != -1 
-        || document.getElementById("resultado").value.indexOf('+') != -1
-        || document.getElementById("resultado").value.indexOf('-') != -1
-        || document.getElementById("resultado").value.indexOf('/') != -1) {
+        if (contieneOperador()) {
             calcular();
         }
         var operando1 = document.getElementById("resultado").value;
         document.getElementById("resultado").value = operando1 + oper;
         document.getElementById("memoria").value = oper;
     } else {
-        calcular();
+        if (contieneOperador()) {
+            calcular();
+        }
     }
+}
+
+function contieneOperador() {
+    return document.getElementById("resultado").value.indexOf('*') != -1 
+        || document.getElementById("resultado").value.indexOf('+') != -1
+        || document.getElementById("resultado").value.indexOf('-') != -1
+        || document.getElementById("resultado").value.indexOf('/') != -1;
 }
 
 function calcular() {
