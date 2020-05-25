@@ -1,0 +1,70 @@
+<html>
+    <head>
+        <script src="app.js"></script>
+        <link rel="stylesheet" href="app.js">        
+        <link rel="stylesheet" href="styles.css">
+        <link href="https://fonts.googleapis.com/css2?family=Roboto&display=swap" rel="stylesheet">
+    </head>
+    <body class="contenedor">
+      <form id="form" class="form" action="#">
+        <div class="field-container">
+          <label>Nombre</label><br>
+          <input type="text" minlength="3" class="input text-input" name="nombre" required>
+        </div>
+        <div class="field-container">
+          <label>Apellido</label><br>
+          <input type="text" minlength="3" class="input text-input" name="apellido" required>
+        </div>
+        <div class="field-container">
+          <label>Email</label><br>
+          <input type="email" class="input text-input" name="email" required>
+        </div>
+        <div class="field-container">
+          <label>Edad</label><br>
+          <input type="number" class="input text-input" name="edad" min="0" max="100" required>
+        </div>
+        <div class="field-container">
+          <label>Sexo</label><br>
+          <label>
+            <input type="radio" checked name="sexo" value="mujer">
+            Mujer
+          </label>
+          <label>
+            <input type="radio" name="sexo" value="hombre">
+            Hombre
+          </label>
+          <label>
+            <input type="radio" name="sexo" value="otro">
+            Otro
+          </label>
+        </div>
+        <div class="field-container">
+          <label>Temas de interes</label><br>  
+          <input name="intereses[]" type="checkbox" name="musica" value="musica">
+          <label>Música</label><br>
+          <input name="intereses[]" type="checkbox" name="musica" value="deporte">
+          <label>Deporte</label><br>
+          <input name="intereses[]" type="checkbox" name="musica" value="juegos">
+          <label>Juegos</label><br>
+          <input name="intereses[]" type="checkbox" name="musica" value="tecnologia">
+          <label>Tecnología</label>
+        </div>
+        <div class="field-container">
+          <label>Pais</label><br>
+          <select name="pais" class="input text-input">
+            <option>Argentina</option>
+            <option>Chile</option>
+            <option>Brasil</option>
+            <option>Uruguay</option>
+          </select>
+        </div>
+        <div class="field-container">
+          <label>Comentarios</label><br>
+          <textarea name="comentario" rows="4" class="input text-input text-area" name="comentarios"></textarea>
+        </div>
+        <div class="field-container">
+          <button onclick="validateform()" type="submit">Enviar</button>
+        </div>
+      </form>
+    </body>
+</html>
