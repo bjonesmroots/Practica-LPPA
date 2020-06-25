@@ -6,35 +6,45 @@ var fichaRoja;
 var fichaAmarilla;
 var turno;
 var fichasTotales = 0;
+var juegoTerminado = false;
 
 window.onload = function () {
     canvas = document.getElementById("tablero");
     turno = document.getElementById("turno");
     contexto = canvas.getContext("2d");
     canvas.addEventListener('click', function(event) {
-        var canvasLeft = canvas.offsetLeft + canvas.clientLeft,
-        canvasTop = canvas.offsetTop + canvas.clientTop;
-        var x = event.pageX - canvasLeft,
-            y = event.pageY - canvasTop;    
-        x = Math.trunc(x / 85);
-        y = Math.trunc(y / 85);
-        dibujarFicha(x,y);        
-        localStorage.setItem('tablero', JSON.stringify(tablero));
-        localStorage.setItem('jugador', jugador);
+        if (!juegoTerminado) {
+            var canvasLeft = canvas.offsetLeft + canvas.clientLeft,
+            canvasTop = canvas.offsetTop + canvas.clientTop;
+            var x = event.pageX - canvasLeft,
+                y = event.pageY - canvasTop;    
+            x = Math.trunc(x / 85);
+            y = Math.trunc(y / 85);
+            if (dibujarFicha(x,y)) {
+                setTimeout(function () {
+                    calcularVictoria();   
+                    calcularTurno();
+                }, 50);
+            }
+            localStorage.setItem('tablero', JSON.stringify(tablero));
+            localStorage.setItem('jugador', jugador);
+        } else {
+            alert('El juego a terminado, por favor reinicie.');
+        }
     }, false);
     iniciarJuego();
+}
+function iniciarJuego() {
+    juegoTerminado = false;
+    limpiarTablero();
+    jugador = 1;
 }
 
 function reiniciarJuego() {
     localStorage.removeItem('tablero');
-    limpiarTablero();
-    jugador = 1;
+    iniciarJuego();
 }
 
-function iniciarJuego() {
-    limpiarTablero();
-    jugador = 1;
-}
 
 function limpiarTablero() {
     fichasTotales = 0;
@@ -75,6 +85,7 @@ function cargarLocalStorage() {
                 }
             }
             jugador = localStorage.getItem('jugador');
+            calcularVictoria();
             calcularTurno();
         }
 }
@@ -88,13 +99,11 @@ function dibujarFicha(x,y) {
         y = calcularYLibre(x);
         contexto.drawImage(ficha,x*83.8+7.5,y*84.2+7.5);
         tablero[x][y] = jugador;
-        setTimeout(function () {
-            fichasTotales++;
-            calcularVictoria(x,y);
-            calcularTurno();
-        }, 50);
+        fichasTotales++;
+        return true;
     } else {
         alert('Esa casilla se encuentra ocupada.');
+        return false;
     }
 }
 
@@ -116,32 +125,34 @@ function calcularTurno() {
     }
 }
 
-function calcularVictoria(x,y) {
+function calcularVictoria() {
     var victoria = false;
-    victoria = calcularVictoriaD(x,y);
-    if (!victoria) {
-        victoria = calcularVictoriaI(x,y);
+    for(var i=0; i<7; i++){
+        for(var j=0; j<6; j++){
+            if (!victoria) {
+                victoria = calcularVictoriaD(i,j);
+                if (!victoria) {
+                    victoria = calcularVictoriaAb(i,j);
+                }    
+                if (!victoria) {
+                    victoria = calcularVictoriaAbI(i,j);
+                }    
+                if (!victoria) {
+                    victoria = calcularVictoriaAbD(i,j);
+                }
+            } else {
+                break;
+            }
+        }
     }
-    if (!victoria) {
-        victoria = calcularVictoriaAb(x,y);
-    }    
-    if (!victoria) {
-        victoria = calcularVictoriaAbI(x,y);
-    }    
-    if (!victoria) {
-        victoria = calcularVictoriaAbD(x,y);
-    }
-    if (!victoria) {
-        victoria = calcularVictoriaArI(x,y);
-    }    
-    if (!victoria) {
-        victoria = calcularVictoriaArD(x,y);
-    }
-    if (victoria) {
+    
+    if (victoria) {        
+        juegoTerminado = true;
         var ganador = (jugador == 1 ? 'Rojo' : 'Amarillo');
         alert('Victoria del jugador '+ ganador + "!!!");
     } else {
         if (fichasTotales == 42) {
+            juegoTerminado = true;
             alert('Empate!');
         }
     }
@@ -150,17 +161,6 @@ function calcularVictoria(x,y) {
 function calcularVictoriaD(x,y) {
     var esIgual = true;
     for(var i=x; i<x+4; i++){
-        if (i > 6 || i < 0 || tablero[i][y] != jugador) {
-            esIgual = false;
-            break;
-        }
-    }
-    return esIgual;
-}
-
-function calcularVictoriaI(x,y) {
-    var esIgual = true;
-    for(var i=x; i>x-4; i--){
         if (i > 6 || i < 0 || tablero[i][y] != jugador) {
             esIgual = false;
             break;
@@ -199,36 +199,6 @@ function calcularVictoriaAbD(x,y) {
     var contador = 0;
     for(var i=y; i<y+4; i++){
         var j = x+contador;
-        if (i > 5 || i < 0 || j > 6 || j < 0 || tablero[j][i] != jugador) {
-            esIgual = false;
-            break;
-        }
-        contador++;
-    }
-    return esIgual;
-}
-
-
-function calcularVictoriaArD(x,y) {
-    var esIgual = true;
-    var contador = 0;
-    for(var i=y; i>y-4; i--){
-        var j = x+contador;
-        if (i > 5 || i < 0 || j > 6 || j < 0 || tablero[j][i] != jugador) {
-            esIgual = false;
-            break;
-        }
-        contador++;
-    }
-    return esIgual;
-}
-
-
-function calcularVictoriaArI(x,y) {
-    var esIgual = true;
-    var contador = 0;
-    for(var i=y; i>y-4; i--){
-        var j = x-contador;
         if (i > 5 || i < 0 || j > 6 || j < 0 || tablero[j][i] != jugador) {
             esIgual = false;
             break;
