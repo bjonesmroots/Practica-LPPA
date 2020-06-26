@@ -1,16 +1,16 @@
 var tablero = new Array();
 var canvas;
 var contexto;
-var jugador;
+var jugadorActual;
 var fichaRoja;
 var fichaAmarilla;
-var turno;
+var labelTurno;
 var fichasTotales = 0;
 var juegoTerminado = false;
 
 window.onload = function () {
     canvas = document.getElementById("tablero");
-    turno = document.getElementById("turno");
+    labelTurno = document.getElementById("labelTurno");
     contexto = canvas.getContext("2d");
     canvas.addEventListener('click', function(event) {
         if (!juegoTerminado) {
@@ -27,7 +27,7 @@ window.onload = function () {
                 }, 50);
             }
             localStorage.setItem('tablero', JSON.stringify(tablero));
-            localStorage.setItem('jugador', jugador);
+            localStorage.setItem('jugadorActual', jugadorActual);
         } else {
             alert('El juego a terminado, por favor reinicie.');
         }
@@ -35,12 +35,12 @@ window.onload = function () {
     iniciarJuego();
 }
 function iniciarJuego() {
-    juegoTerminado = false;
     limpiarTablero();
-    jugador = 1;
+    jugadorActual = 1;
 }
 
 function reiniciarJuego() {
+    juegoTerminado = false;
     localStorage.removeItem('tablero');
     iniciarJuego();
 }
@@ -78,13 +78,13 @@ function cargarLocalStorage() {
             var tableroTemp = JSON.parse(tableroLocalStorage);
             for(var i=6; i>=0; i--){
                 for(var j=5; j>=0; j--){
-                    jugador = tableroTemp[i][j];
-                    if (jugador != 0) {
+                    jugadorActual = tableroTemp[i][j];
+                    if (jugadorActual != 0) {
                         dibujarFicha(i,j);
                     }
                 }
             }
-            jugador = localStorage.getItem('jugador');
+            jugadorActual = localStorage.getItem('jugadorActual');
             calcularVictoria();
             calcularTurno();
         }
@@ -92,13 +92,13 @@ function cargarLocalStorage() {
 
 function dibujarFicha(x,y) {
     var ficha = fichaRoja;
-    if (jugador != 1) {
+    if (jugadorActual != 1) {
         ficha = fichaAmarilla;
     }
     if (tablero[x][y] == 0) {
         y = calcularYLibre(x);
         contexto.drawImage(ficha,x*83.8+7.5,y*84.2+7.5);
-        tablero[x][y] = jugador;
+        tablero[x][y] = jugadorActual;
         fichasTotales++;
         return true;
     } else {
@@ -116,12 +116,12 @@ function calcularYLibre(x) {
 }
 
 function calcularTurno() {
-    if (jugador == 1) {
-        jugador = 2;
-        turno.innerHTML = "Turno del jugador Amarillo";
+    if (jugadorActual == 1) {
+        jugadorActual = 2;
+        labelTurno.innerHTML = "Turno del jugador Amarillo";
     } else {
-        jugador = 1;
-        turno.innerHTML = "Turno del jugador Rojo";
+        jugadorActual = 1;
+        labelTurno.innerHTML = "Turno del jugador Rojo";
     }
 }
 
@@ -148,7 +148,7 @@ function calcularVictoria() {
     
     if (victoria) {        
         juegoTerminado = true;
-        var ganador = (jugador == 1 ? 'Rojo' : 'Amarillo');
+        var ganador = (jugadorActual == 1 ? 'Rojo' : 'Amarillo');
         alert('Victoria del jugador '+ ganador + "!!!");
     } else {
         if (fichasTotales == 42) {
@@ -161,7 +161,7 @@ function calcularVictoria() {
 function calcularVictoriaD(x,y) {
     var esIgual = true;
     for(var i=x; i<x+4; i++){
-        if (i > 6 || i < 0 || tablero[i][y] != jugador) {
+        if (i > 6 || i < 0 || tablero[i][y] != jugadorActual) {
             esIgual = false;
             break;
         }
@@ -172,7 +172,7 @@ function calcularVictoriaD(x,y) {
 function calcularVictoriaAb(x,y) {
     var esIgual = true;
     for(var i=y; i<y+4; i++){
-        if (i > 5 || i < 0 || tablero[x][i] != jugador) {
+        if (i > 5 || i < 0 || tablero[x][i] != jugadorActual) {
             esIgual = false;
             break;
         }
@@ -185,7 +185,7 @@ function calcularVictoriaAbI(x,y) {
     var contador = 0;
     for(var i=y; i<y+4; i++){
         var j = x-contador;
-        if (i > 5 || i < 0 || j > 6 || j < 0 || tablero[j][i] != jugador) {
+        if (i > 5 || i < 0 || j > 6 || j < 0 || tablero[j][i] != jugadorActual) {
             esIgual = false;
             break;
         }
@@ -199,7 +199,7 @@ function calcularVictoriaAbD(x,y) {
     var contador = 0;
     for(var i=y; i<y+4; i++){
         var j = x+contador;
-        if (i > 5 || i < 0 || j > 6 || j < 0 || tablero[j][i] != jugador) {
+        if (i > 5 || i < 0 || j > 6 || j < 0 || tablero[j][i] != jugadorActual) {
             esIgual = false;
             break;
         }
