@@ -10,8 +10,13 @@ var juegoTerminado = false;
 var resultados;
 var partidas;
 var botonGuardar;
-
+var tiempoRojo = 0;
+var tiempoAmarillo = 0;
+var lblTiempoRojo;
+var lblTiempoAmarillo;
 window.onload = function () {    
+    lblTiempoRojo = document.getElementById("tiempoRojo");
+    lblTiempoAmarillo = document.getElementById("tiempoAmarillo");
     botonGuardar = document.getElementById("guardar_partida");
     canvas = document.getElementById("tablero");
     labelTurno = document.getElementById("labelTurno");
@@ -32,6 +37,8 @@ window.onload = function () {
             }
             localStorage.setItem('tablero', JSON.stringify(tablero));
             localStorage.setItem('jugadorActual', jugadorActual);
+            localStorage.setItem('tiempoRojo', tiempoRojo);
+            localStorage.setItem('tiempoAmarillo', tiempoAmarillo);
         } else {
             alert('El juego a terminado, por favor reinicie.');
         }
@@ -39,6 +46,7 @@ window.onload = function () {
     iniciarJuego();
     cargarResultados();
     cargarPartidasGuardadas();
+    contador();
 }
 
 function cargarResultados() {    
@@ -64,10 +72,29 @@ function cargarPartidasGuardadas() {
 function iniciarJuego() {
     limpiarTablero();
     jugadorActual = 1;
+    tiempoRojo = 0;
+    tiempoAmarillo = 0;
+}
+
+function contador() {
+    if (!juegoTerminado) {
+        if (jugadorActual == 1) {
+            tiempoRojo += 1;
+        } else {
+            tiempoAmarillo += 1;
+        } 
+        lblTiempoAmarillo.innerHTML = 'Amarillo: ' + tiempoAmarillo + ' segundos';
+        lblTiempoRojo.innerHTML = 'Rojo: ' + tiempoRojo + ' segundos';
+        setTimeout(contador, 1000);
+    }
 }
 
 function reiniciarJuego() {
+    const reiniciarContador = juegoTerminado;
     juegoTerminado = false;
+    if (reiniciarContador) {
+        contador();
+    }
     botonGuardar.style.display = 'inline'; 
     localStorage.removeItem('tablero');
     iniciarJuego();
@@ -113,6 +140,8 @@ function cargarLocalStorage() {
                 }
             }
             jugadorActual = localStorage.getItem('jugadorActual');
+            tiempoAmarillo = parseInt(localStorage.getItem('tiempoAmarillo'));
+            tiempoRojo = parseInt(localStorage.getItem('tiempoRojo'));
             calcularVictoria(false);
             calcularTurno();
         }
@@ -403,6 +432,8 @@ function armarTablaPartidas(partidas) {
                         setTimeout(() => {                            
                             localStorage.setItem('tablero',JSON.stringify(partidas[this.value].tablero));
                             localStorage.setItem('jugadorActual',partidas[this.value].jugadorActual);
+                            localStorage.setItem('tiempoRojo',partidas[this.value].tiempoRojo);
+                            localStorage.setItem('tiempoAmarillo',partidas[this.value].tiempoAmarillo);
                             cargarLocalStorage();
                         }, 200);
                     }
@@ -422,11 +453,16 @@ function armarTablaPartidas(partidas) {
 
 
 function guardarPartida() {
+    if (partidas.length >= 7) {
+        partidas.splice(0, 1);
+    }
     partidas.push({
         fecha : formatDate(new Date()),
         imagen : canvas.toDataURL("image/png"),
         tablero: tablero,
-        jugadorActual: jugadorActual
+        jugadorActual: jugadorActual == 1 ? 2 : 1,
+        tiempoRojo: tiempoRojo,
+        tiempoAmarillo: tiempoAmarillo
     });
     localStorage.setItem('partidas', JSON.stringify(partidas));
     cargarPartidasGuardadas();

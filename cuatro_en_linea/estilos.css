@@ -3,6 +3,9 @@ body {
   width: 100%;
 }
 
+h2 {
+  font-size: 21px;
+}
 table {
   font-family: "Trebuchet MS", Arial, Helvetica, sans-serif;
   border-collapse: collapse;
@@ -28,6 +31,9 @@ th {
 .column {
     flex: 1;
     text-align: center;
+}
+.row { 
+  display: flex;
 }
 
 
