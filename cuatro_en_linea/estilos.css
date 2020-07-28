@@ -1,18 +1,17 @@
 body {
-    max-width: 1250px;    
-    text-align: center;
-    margin: 0 auto;
+  display: flex;
+  width: 100%;
 }
 
 table {
-    font-family: "Trebuchet MS", Arial, Helvetica, sans-serif;
-    border-collapse: collapse;
-    width: 600px;
+  font-family: "Trebuchet MS", Arial, Helvetica, sans-serif;
+  border-collapse: collapse;
+  width: 600px;
 }
   
 td, th {
-    border: 1px solid #ddd;
-    padding: 8px;
+  border: 1px solid #ddd;
+  padding: 8px;
 }
   
 tr:nth-child(even){background-color: #f2f2f2;}
@@ -20,18 +19,15 @@ tr:nth-child(even){background-color: #f2f2f2;}
 tr:hover {background-color: #ddd;}
   
 th {
-    padding-top: 12px;
-    padding-bottom: 12px;
-    text-align: left;
-    background-color: #7370fa;
-    color: white;
+  padding-top: 12px;
+  padding-bottom: 12px;
+  text-align: left;
+  background-color: #7370fa;
+  color: white;
 }
-#juego {
-    float: right;
-}
-#resultados {
-    float: left;
-    padding-top: 100px;
+.column {
+    flex: 1;
+    text-align: center;
 }
 
 

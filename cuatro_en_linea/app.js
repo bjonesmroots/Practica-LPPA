@@ -8,8 +8,11 @@ var labelTurno;
 var fichasTotales = 0;
 var juegoTerminado = false;
 var resultados;
+var partidas;
+var botonGuardar;
 
 window.onload = function () {    
+    botonGuardar = document.getElementById("guardar_partida");
     canvas = document.getElementById("tablero");
     labelTurno = document.getElementById("labelTurno");
     contexto = canvas.getContext("2d");
@@ -35,6 +38,7 @@ window.onload = function () {
     }, false);
     iniciarJuego();
     cargarResultados();
+    cargarPartidasGuardadas();
 }
 
 function cargarResultados() {    
@@ -47,6 +51,16 @@ function cargarResultados() {
     armarTabla(resultados);
 }
 
+function cargarPartidasGuardadas() {    
+    partidas = localStorage.getItem('partidas');
+    if (!partidas) {
+        partidas = [];
+    } else {
+        partidas = JSON.parse(partidas);
+    }
+    armarTablaPartidas(partidas);
+}
+
 function iniciarJuego() {
     limpiarTablero();
     jugadorActual = 1;
@@ -54,6 +68,7 @@ function iniciarJuego() {
 
 function reiniciarJuego() {
     juegoTerminado = false;
+    botonGuardar.style.display = 'inline'; 
     localStorage.removeItem('tablero');
     iniciarJuego();
 }
@@ -205,6 +220,10 @@ function dibujarLineaVictoria(x,y,x2,y2) {
 }
 
 function guardarResultados(resultado) {
+    botonGuardar.style.display = 'none'; 
+    if (resultados.length >= 7) {
+        resultados.splice(0, 1);
+    }
     resultados.push(resultado);
     localStorage.setItem('resultados', JSON.stringify(resultados));
     cargarResultados();
@@ -294,16 +313,16 @@ function armarTabla(resultados) {
         tr = table.insertRow(-1);  
         for (var j = 0; j < col.length; j++) {
             var tabCell = tr.insertCell(-1);
-            var resultado = resultados[i][col[j][1]];
+            var valor = resultados[i][col[j][1]];
             if (col[j][1] == 'imagen') {
                 var img = document.createElement("img");
-                img.src = resultado;
+                img.src = valor;
                 img.width = 100;
                 img.alt = resultados[i][col[1][1]];
                 img.className = "imgResultado"
                 tabCell.appendChild(img);
             } else {
-                tabCell.innerHTML = resultado;
+                tabCell.innerHTML = valor;
             }
         }
     }
@@ -312,7 +331,6 @@ function armarTabla(resultados) {
     divContainer.innerHTML = "";
     divContainer.appendChild(table);
 
-    cargarModal();
 }
 
 function cargarModal() {
@@ -345,4 +363,71 @@ function formatDate(date) {
     minutes = minutes < 10 ? '0'+minutes : minutes;
     var strTime = hours + ':' + minutes + ' ' + ampm;
     return date.getDate() + "/" + (date.getMonth()+1) + "/" + date.getFullYear() + "  " + strTime;
-  }
+}
+
+function armarTablaPartidas(partidas) {
+    if (partidas.length > 0) {
+        var col = [];
+        col.push(['Captura','imagen']);
+        col.push(['Fecha','fecha']);
+        col.push(['Recuperar','recuperar']);
+    
+        var table = document.createElement("table");
+    
+        var tr = table.insertRow(-1);
+    
+        for (var i = 0; i < col.length; i++) {
+            var th = document.createElement("th");
+            th.innerHTML = col[i][0];
+            tr.appendChild(th);
+        }
+    
+        for (var i = partidas.length - 1; i >= 0; i--) {  
+            tr = table.insertRow(-1);  
+            for (var j = 0; j < col.length; j++) {
+                var tabCell = tr.insertCell(-1);
+                var valor = partidas[i][col[j][1]];
+                if (col[j][1] == 'imagen') {
+                    var img = document.createElement("img");
+                    img.src = valor;
+                    img.width = 100;
+                    img.alt = partidas[i][col[1][1]];
+                    img.className = "imgResultado"
+                    tabCell.appendChild(img);
+                } else if (col[j][1] == 'recuperar') {
+                    var btn = document.createElement("button");
+                    btn.innerHTML = 'Recuperar';
+                    btn.value = i;
+                    btn.onclick = function recuperarPartida() {
+                        reiniciarJuego();
+                        setTimeout(() => {                            
+                            localStorage.setItem('tablero',JSON.stringify(partidas[this.value].tablero));
+                            localStorage.setItem('jugadorActual',partidas[this.value].jugadorActual);
+                            cargarLocalStorage();
+                        }, 200);
+                    }
+                    tabCell.appendChild(btn);
+                }  else {
+                    tabCell.innerHTML = valor;
+                }
+            }
+        }
+    
+        var divContainer = document.getElementById("partidas_guardadas");
+        divContainer.innerHTML = "";
+        divContainer.appendChild(table);
+    }
+    cargarModal();
+}
+
+
+function guardarPartida() {
+    partidas.push({
+        fecha : formatDate(new Date()),
+        imagen : canvas.toDataURL("image/png"),
+        tablero: tablero,
+        jugadorActual: jugadorActual
+    });
+    localStorage.setItem('partidas', JSON.stringify(partidas));
+    cargarPartidasGuardadas();
+}

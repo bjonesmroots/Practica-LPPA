@@ -5,7 +5,13 @@
         <link href="estilos.css" rel="stylesheet" type="text/css"/>
     </head>
     <body>
-        <div id="juego">
+        <div class="column">
+            <div>
+                <h1>Partidas Anteriores</h1>
+            </div>
+            <div id="resultados"></div>
+        </div>
+        <div class="column">
             <div>
                 <h1>4 en linea</h1>
                 <span id='labelTurno'>Turno del jugador Rojo</span>
@@ -14,8 +20,15 @@
                 <canvas id="tablero" width="598" height="518"></canvas>
             </div>
             <button onclick="reiniciarJuego()">Reiniciar</button>
+            <button id="guardar_partida" onclick="guardarPartida()">Guardar Partida</button>
         </div>
-        <div id="resultados"></div>
+        
+        <div class="column">
+            <div>
+                <h1>Partidas Guardadas</h1>
+            </div>
+            <div id="partidas_guardadas"></div>
+        </div>
         <script src="app.js" type="text/javascript"></script>
         <div id="myModal" class="modal">
             <span class="close">&times;</span>
