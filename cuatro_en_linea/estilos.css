@@ -36,7 +36,11 @@ th {
   display: flex;
 }
 
-
+.contacto {
+  position: absolute;
+  top: 10px;
+  right: 10px;
+}
 /*Modal*/
 .imgResultado:hover {opacity: 0.7;}
 

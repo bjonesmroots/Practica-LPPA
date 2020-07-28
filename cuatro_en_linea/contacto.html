@@ -1,0 +1,26 @@
+<html>
+    <head>
+        <script src="contacto.js"></script>
+        <link rel="stylesheet" href="estilos_contacto.css">
+        <link href="https://fonts.googleapis.com/css2?family=Roboto&display=swap" rel="stylesheet">
+    </head>
+    <body class="contenedor">
+      <form id="form" class="form" action="#">
+        <div class="field-container">
+          <label>Nombre</label><br>
+          <input type="text" minlength="3" class="input text-input" name="nombre" required>
+        </div>
+        <div class="field-container">
+          <label>Email</label><br>
+          <input type="email" class="input text-input" name="email" required>
+        </div>
+        <div class="field-container">
+          <label>Mensaje</label><br>
+          <textarea name="mensaje" rows="4" minlength="5" class="input text-input text-area"></textarea>
+        </div>
+        <div class="field-container">
+          <button onclick="validateform()" type="submit">Enviar</button>
+        </div>
+      </form>
+    </body>
+</html>

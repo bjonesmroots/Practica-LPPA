@@ -24,16 +24,21 @@
                     <h2 id='tiempoAmarillo'></h2>
                 </div>
             </div>
-            <div>
+            <div class="row"> 
                 <canvas id="tablero" width="598" height="518"></canvas>
             </div>
-            <button onclick="reiniciarJuego()">Reiniciar</button>
-            <button id="guardar_partida" onclick="guardarPartida()">Guardar Partida</button>
+            <div class="row"> 
+                <div class="column">
+                    <button onclick="reiniciarJuego()">Reiniciar</button>
+                    <button id="guardar_partida" onclick="guardarPartida()">Guardar Partida</button>
+                </div>
+            </div>
         </div>
         
         <div class="column">
             <div>
                 <h1>Partidas Guardadas</h1>
+                <a class="contacto" href="contacto.html">CONTACTO</a>
             </div>
             <div id="partidas_guardadas"></div>
         </div>
@@ -42,6 +47,6 @@
             <span class="close">&times;</span>
             <img class="modal-content" id="img01">
             <div id="caption"></div>
-          </div>
+        </div>        
     </body>
 </html>
