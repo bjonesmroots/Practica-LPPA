@@ -12,24 +12,31 @@
             <div id="resultados"></div>
         </div>
         <div class="column">
-            <div class="row"> 
-                <div class="column">
-                    <h2 id='tiempoRojo'></h2>
+            <div> 
+                <div class="row"> 
+                    <div class="column">
+                        <h1>4 en linea</h1>
+                        <span id='labelTurno'>Turno del jugador Rojo</span>
+                    </div>            
                 </div>
-                <div class="column">
-                    <h1>4 en linea</h1>
-                    <span id='labelTurno'>Turno del jugador Rojo</span>
-                </div>                
-                <div class="column">
-                    <h2 id='tiempoAmarillo'></h2>
+                <div class="row"> 
+                    <div class="column">
+                        <h2 id='tiempoRojo'></h2>
+                    </div>    
+                    <div class="column">
+                        <h2 id='tiempoAmarillo'></h2>
+                    </div>    
+                    <div class="column" id="contenedorTiempoNegro">
+                        <h2 id='tiempoNegro'></h2>
+                    </div>
                 </div>
             </div>
             <div class="row"> 
                 <canvas id="tablero" width="598" height="518"></canvas>
             </div>
-            <div class="row"> 
+            <div class="row funciones"> 
                 <div class="column">
-                    <button onclick="reiniciarJuego()">Reiniciar</button>
+                    <button onclick="reiniciarJuego(true)">Reiniciar</button>
                     <button id="guardar_partida" onclick="guardarPartida()">Guardar Partida</button>
                 </div>
             </div>
@@ -47,6 +54,37 @@
             <span class="close">&times;</span>
             <img class="modal-content" id="img01">
             <div id="caption"></div>
+        </div>        
+        <div id="myModal2" class="modal">
+            <span class="close">&times;</span>
+            <form id="form" class="form" action="#">
+                <div class="field-container">
+                    <label>Cantidad de jugadores</label><br>
+                    <label>
+                      <input type="radio" onclick="ocultarMostrar3(this);" checked name="cantidad_jugadores" value="2">
+                      2 jugadores
+                    </label>
+                    <label>
+                      <input type="radio" onclick="ocultarMostrar3(this);" name="cantidad_jugadores" value="3">
+                      3 jugadores
+                    </label>
+                  </div>
+                <div class="field-container">
+                  <label>Nombre Jugador Rojo</label><br>
+                  <input type="text" minlength="3" class="input text-input" name="nombre_rojo" required>
+                </div>
+                <div class="field-container">
+                  <label>Nombre Jugador Amarillo</label><br>
+                  <input type="text" minlength="3" class="input text-input" name="nombre_amarillo" required>
+                </div>
+                <div class="field-container">
+                  <label>Nombre Jugador Negro</label><br>
+                  <input type="text" disabled id="jugador3" minlength="3" class="input text-input" name="nombre_negro" required>
+                </div>
+                <div class="field-container">
+                  <button type="submit">Empezar!</button>
+                </div>
+              </form>
         </div>        
     </body>
 </html>
